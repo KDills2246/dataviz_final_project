@@ -1,5 +1,6 @@
 ---
 title: "Visualizing Text and Distributions"
+author: "Katie Dills"
 output: 
   html_document:
     keep_md: true
@@ -31,6 +32,13 @@ See https://www.reisanar.com/slides/relationships-models#10 for a reminder on ho
 
 ```{r, echo = FALSE, out.width="80%", fig.align='center'}
 knitr::include_graphics("https://github.com/reisanar/figs/raw/master/tpa_max_temps_facet.png")
+```
+
+
+```{r}
+#test r chunk for commit.
+
+#Recreate max tempatures by Month :
 ```
 
 Hint: the option `binwidth = 3` was used with the `geom_histogram()` function.
