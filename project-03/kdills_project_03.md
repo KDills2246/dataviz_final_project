@@ -15,7 +15,7 @@ output:
 
 ## Top 100 Songs
 
-I decided to use the text mining techniques I have learned over tha past few semesters to examine the lyrics of a few of the top hit songs.
+I decided to use the text mining techniques I have learned over the past few semesters to examine the lyrics of a few of the top hit songs.
 
 
 
@@ -24,7 +24,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -43,7 +43,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ```
