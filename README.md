@@ -1,8 +1,8 @@
 # Data Visualization and Reproducible Research
 
-> Firstname Lastname. 
+> Katie Dills
 
-Learn more about me in my [GitHub profile page](https://github.com/reiminer)
+Learn more about me in my [GitHub profile page](https://github.com/KDills2246)
 
 
 The following is a sample of products created during the _"Data Visualization and Reproducible Research"_ course in Fall 2020.
@@ -10,11 +10,10 @@ The following is a sample of products created during the _"Data Visualization an
 
 ## Project 01
 
-In the `project_01/` folder you can find... _[short description of your revised project goes here]_
+In the `project_01/` folder you can find... _[US births, primarily focusing on the days of the week by birth count]_
 
 **Sample data visualization:** 
 
-_[include your favorite visualization from this project here]_
 <img src="https://github.com/KDills2246/dataviz_final_project/blob/main/figures/birthsbyday.png?raw=true" width="70%" height="70%">
 
 
