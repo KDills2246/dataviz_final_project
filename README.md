@@ -15,7 +15,7 @@ In the `project_01/` folder you can find... _[short description of your revised 
 **Sample data visualization:** 
 
 _[include your favorite visualization from this project here]_
-<img src="https://github.com/reisanar/figs/raw/master/echarts.png" width="70%" height="70%">
+<img src="https://github.com/KDills2246/dataviz_final_project/blob/main/figures/wordcount.png?raw=true" width="70%" height="70%">
 
 
 
