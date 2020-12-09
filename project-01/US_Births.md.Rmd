@@ -1,11 +1,8 @@
 ---
 title: "Closer Look at US Births"
-author: "Katie Dills"
-output: 
+output:
   html_document:
-    keep_md: true
-    toc: true
-    toc_float: true
+    df_print: paged
 ---
 
 
