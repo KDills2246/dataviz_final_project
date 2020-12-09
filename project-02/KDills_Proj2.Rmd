@@ -1,0 +1,144 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+***
+
+# Top Music Hits
+
+```{r}
+library(gapminder)
+library(plotly)
+library(dplyr)
+library(tidyverse)
+library(tmaptools)
+library(tmap)
+library(sf)
+
+top_hits <- read_csv("https://raw.githubusercontent.com/reisanar/datasets/master/all_billboard_summer_hits.csv")
+artists_states <- readxl::read_xlsx("/Users/katiedills/Desktop/Mini_Project2/data/artists_states.xlsx") 
+
+```
+
+```{r}
+tail(top_hits)
+```
+
+```{r}
+artist_count <-top_hits %>% 
+  group_by(artist_name) %>% 
+  summarise(track_count = sum(n())) %>% 
+  arrange(desc(track_count))
+print(artist_count)
+```
+
+```{r}
+head(artists_states)
+```
+```{r}
+class(artist_count)
+```
+
+
+```{r}
+artist_location <- right_join(artist_count, artists_states)
+
+print(artist_location)
+```
+
+
+***
+
+# Data Visualizations
+
+## Interactive Plot
+### Danceability vs. Energy
+
+After reviewing the top few artist by count of top hits, I decided to compare the dancebility and energy by artist. I chose Katy Perry, Mariah Carey, and Rihanna, due to my knowledge of their popular songs and knowing they are mostly upbeat songs. However after plotting the three I was surprised to see that Mariah Carey's song has much lower energy levels compared to Katy and Rihanna, although Rihanna also had a few top hits that were not as high energy as Katy.
+
+```{r}
+top_females <- filter(top_hits,
+ artist_name %in% c("Rihanna", "Katy Perry", "Mariah Carey"))
+
+head(top_females)
+```
+
+```{r}
+my_plot <- ggplot(
+  data = top_females,
+  mapping = aes(x = danceability, y = energy, 
+                color = artist_name)) +
+  geom_point() +
+  scale_x_log10() +
+  theme_minimal()
+
+ggplotly(my_plot)
+```
+
+***
+
+### Visualizing Relationships
+
+
+I then wanted to analyze the energy vs. loudness of the top hits. And logically, as the loudness increases so does the energy. Also interesting that of all the top hits there is a fairly good balance between energy and loudness with not to many outliers of being strongly towards either attribute.
+
+```{r}
+ggplot(top_hits, aes(x = loudness, y = energy)) +
+  geom_point() +
+  geom_smooth(method = "lm", 
+              formula = "y ~ x") + 
+  geom_smooth() +
+  theme_minimal()
+```
+***
+
+### Spatial Relationships
+
+My dataset did not have any location information, so in order to create a spatial relational graph I decided to take random artist name and create an additional file that included their birth place. Once I was able to do so I then used the shapefile to map out the relationship between where the artist is born and how many top hits they may have. It is very clear that California is the most common place for top hit artist to be born in, this may have to do with access to the music industry itself.
+
+```{r}
+library(sf)
+temp_shapefile <- tempfile()
+download.file("https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip", temp_shapefile)
+unzip(temp_shapefile)
+
+sf_states <- read_sf('cb_2018_us_state_500k.shp')
+```
+
+```{r}
+names(sf_states)[names(sf_states) == "NAME"] <- "state"
+```
+
+
+
+```{r}
+head(sf_states)
+```
+
+
+```{r}
+music_states <- merge(sf_states, artist_location, by.x = "state", by.y = "state")
+head(music_states)
+```
+
+
+
+```{r}
+tm_shape(music_states) +
+  tm_polygons("track_count") +
+  tm_borders()+
+  tm_lines+
+  tm_view(projection = 2163)+
+  tmap_style("cobalt")
+```
+
+***
+
+## Conclusion
+
+Overall this data set was very interesting to explore and is a large enough dataset that you could easily examine multiple different relationships and correlations between all of the aspects of the songs along with examining how they rank by the artist themselves. I didn't have any specific results I was expecting but rather wanting to see what relationships stood out, such as all of Katy Perry's top hits have high rankings for dancebility and energy compared to other top female artist. It was also interesting to see how the most successful artists are born in California, whether that is due to location and access to the music industry, or if it has more to do with the style of the music industry in the area and if it is more likely to be the most popular. Overall I struggled most with the spatial visualizations as the data did not already have any location formating so I collected my own data on the artist birthplace and created an addition csv to be joined.
+
+***
